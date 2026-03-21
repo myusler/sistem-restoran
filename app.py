@@ -179,6 +179,7 @@ def clear():
 
 # ================= RUN =================
 if __name__ == '__main__':
-    init_db()
+    with app.app_context():
+        init_db()  # create table jika belum ada
     port = int(os.environ.get("PORT", 5000))  # default 5000 untuk local testing
     app.run(host="0.0.0.0", port=port, debug=True)
