@@ -39,6 +39,8 @@ def init_db():
     conn.commit()
     conn.close()
 # ================= ADMIN =================
+with app.app_context():
+    init_db()
 
 @app.teardown_appcontext
 def close_connection(exception):
@@ -179,7 +181,6 @@ def clear():
 
 # ================= RUN =================
 if __name__ == '__main__':
-    with app.app_context():
-        init_db()  # create table jika belum ada
+    
     port = int(os.environ.get("PORT", 5000))  # default 5000 untuk local testing
     app.run(host="0.0.0.0", port=port, debug=True)
