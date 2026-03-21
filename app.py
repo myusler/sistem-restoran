@@ -38,6 +38,13 @@ def init_db():
     conn.commit()
     conn.close()
 # ================= ADMIN =================
+
+@app.teardown_appcontext
+def close_connection(exception):
+    db = getattr(g, '_database', None)
+    if db is not None:
+        db.close()
+
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
     conn = get_db()
@@ -172,5 +179,5 @@ def clear():
 # ================= RUN =================
 if __name__ == '__main__':
     init_db()
-    PORT = int(os.environ.get("PORT", 5000))  # default 5000 untuk local testing
-    app.run(host="0.0.0.0", port=PORT)
+    port = int(os.environ.get("PORT", 5000))  # default 5000 untuk local testing
+    app.run(host="0.0.0.0", port=port, debug=True)
