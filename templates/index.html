@@ -1,0 +1,26 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<h1>Menu</h1>
+<nav>
+  <a href="/">Menu</a>
+  <a href="/kitchen">Kitchen</a>
+  <a href="/payment">Payment</a>
+  <a href="/admin">Admin</a>
+</nav>
+
+<div class="menu-container">
+  {% for item in menu %}
+  <div class="card">
+    <img src="{{ url_for('static', filename='uploads/' + item.image) }}" alt="{{ item.name }}">
+    <h3>{{ item.name }}</h3>
+    <p>RM {{'%.2f' % item.price }}</p>
+    <form action="/order" method="POST">
+      <input type="hidden" name="name" value="{{ item.name }}">
+      <input type="hidden" name="price" value="{{ '%.2f' % item.price }}">
+      <input type="number" name="qty" placeholder="Qty" required>
+      <input type="text" name="note" placeholder="Catatan">
+      <button type="submit">Order</button>
+    </form>
+  </div>
+  {% endfor %}
+</div>

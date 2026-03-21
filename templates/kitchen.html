@@ -1,0 +1,20 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<h1>Kitchen</h1>
+<nav>
+  <a href="/">Menu</a>
+  <a href="/kitchen">Kitchen</a>
+  <a href="/payment">Payment</a>
+  <a href="/admin">Admin</a>
+</nav>
+
+<div class="menu-container">
+  {% for order in orders %}
+  <div class="card">
+    <p>{{ order.item_name }} x{{ order.qty }}</p>
+    <p>{{ order.note }}</p>
+    <a href="/complete/{{ order.id }}"><button>Siap</button></a>
+    <a href="/delete/{{ order.id }}"><button class="delete">Delete</button></a>
+  </div>
+  {% endfor %}
+</div>

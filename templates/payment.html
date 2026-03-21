@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<h1>Payment</h1>
+<nav>
+  <a href="/">Menu</a>
+  <a href="/kitchen">Kitchen</a>
+  <a href="/payment">Payment</a>
+  <a href="/admin">Admin</a>
+</nav>
+
+<div class="menu-container">
+  {% for order in orders %}
+  <div class="card">
+      <p>{{ order.item_name }} x{{ order.qty }}</p>
+      <p>RM {{ '%.2f' % order.subtotal }}</p>
+  </div>
+  {% endfor %}
+</div>
+
+<h2 style="text-align:center;">Total: RM {{ '%.2f' % total }}</h2>
+
+<div style="text-align:center; margin-top:20px;">
+  <button onclick="window.print()">Print</button>
+  <a href="/clear"><button class="delete">Clear</button></a>
+</div>

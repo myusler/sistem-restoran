@@ -1,0 +1,32 @@
+<!-- ================= admin.html ================= -->
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<h1>Admin - Add Menu</h1>
+<nav>
+  <a href="/">Menu</a>
+  <a href="/kitchen">Kitchen</a>
+  <a href="/payment">Payment</a>
+  <a href="/admin">Admin</a>
+</nav>
+
+<form method="POST" enctype="multipart/form-data" style="text-align:center; margin-bottom:20px;">
+  <input name="name" placeholder="Nama">
+  <input name="price" placeholder="Harga">
+  <select name="category">
+      <option value="food">Food</option>
+      <option value="drink">Drink</option>
+  </select>
+  <input type="file" name="image">
+  <button type="submit">Tambah</button>
+</form>
+
+<div class="menu-container">
+  {% for item in menu %}
+  <div class="card">
+      <img src="{{ url_for('static', filename='uploads/' + item.image) }}" width="100">
+      <h3>{{ item.name }}</h3>
+      <p>RM {{ '%.2f' % item.price }}</p>
+      <a href="/delete_menu/{{ item.id }}"><button class="delete">Delete</button></a>
+  </div>
+  {% endfor %}
+</div>
