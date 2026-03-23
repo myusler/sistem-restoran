@@ -1,25 +1,51 @@
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<div style="max-width:350px; margin:20px auto; padding:20px; border:1px solid #000; font-family:monospace;">
 
-<h1>Payment</h1>
-<nav>
-  <a href="/">Menu</a>
-  <a href="/kitchen">Kitchen</a>
-  <a href="/payment">Payment</a>
-  <a href="/admin">Admin</a>
-</nav>
+  <h2 style="text-align:center; margin-bottom:5px;">MY FOOD SHOP</h2>
+  <p style="text-align:center; font-size:12px; margin:0;">Terima Kasih</p>
+  <hr>
 
-<div class="menu-container">
+  <p style="font-size:12px;">
+    Tarikh: {{ now }}
+  </p>
+
+  <hr>
+
   {% for order in orders %}
-  <div class="card">
-      <p>{{ order.item_name }} x{{ order.qty }}</p>
-      <p>RM {{ '%.2f' % order.subtotal }}</p>
+  <div style="font-size:13px; margin-bottom:5px;">
+    <div style="display:flex; justify-content:space-between;">
+      <span>{{ order.item_name }}</span>
+      <span>RM {{ '%.2f' % order.subtotal }}</span>
+    </div>
+    <div style="font-size:11px; color:#555;">
+      {{ order.qty }} x RM {{ '%.2f' % order.price }}
+    </div>
   </div>
   {% endfor %}
+
+  <hr>
+
+  <div style="display:flex; justify-content:space-between; font-weight:bold;">
+    <span>TOTAL</span>
+    <span>RM {{ '%.2f' % total }}</span>
+  </div>
+
+  <hr>
+
+  <p style="text-align:center; font-size:12px;">
+    *** Sila Datang Lagi ***
+  </p>
+
 </div>
 
-<h2 style="text-align:center;">Total: RM {{ '%.2f' % total }}</h2>
-
 <div style="text-align:center; margin-top:20px;">
-  <button onclick="window.print()">Print</button>
-  <a href="/clear"><button class="delete">Clear</button></a>
+  <button onclick="window.print()" 
+          style="padding:10px 15px; background:black; color:white; border:none;">
+    Print
+  </button>
+
+  <a href="/clear">
+    <button style="padding:10px 15px; background:red; color:white; border:none;">
+      Clear
+    </button>
+  </a>
 </div>
