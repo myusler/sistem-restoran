@@ -10,7 +10,7 @@
 
 <div class="menu-container2">
   {% for order in orders %}
-  <div class="card">
+  <div>
       <p>{{ order.item_name }} x{{ order.qty }}</p>
       <p>RM {{ '%.2f' % order.subtotal }}</p>
   </div>
