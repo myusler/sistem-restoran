@@ -12,7 +12,7 @@
   {% for order in orders %}
   <div>
       <p>{{ order.item_name }} x{{ order.qty }}</p>
-      <p>RM {{ '%.2f' % order.subtotal }}</p>
+      <p> = RM {{ '%.2f' % order.subtotal }}</p>
   </div>
   {% endfor %}
 </div>
